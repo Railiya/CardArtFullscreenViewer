@@ -3,7 +3,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.ControllerInput;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 
-namespace CardArtFullscreenViewer
+namespace CardArtFullscreenViewer.Component
 {
     public partial class FullscreenArtViewer : CanvasLayer
     {
@@ -11,9 +11,11 @@ namespace CardArtFullscreenViewer
 
         private ColorRect _background = null;
         private TextureRect _artRect = null;
+
+        private Action _closeCallback = null;
         private bool _isComponentsInitialized = false;
 
-        public static void ShowArt(Texture2D texture)
+        public static void ShowArt(Texture2D texture, Action closeCallback = null)
         {
             if (texture == null)
             {
@@ -33,6 +35,7 @@ namespace CardArtFullscreenViewer
                 }
             }
 
+            _instance._closeCallback = closeCallback;
             _instance?.Open(texture);
         }
 
@@ -46,7 +49,7 @@ namespace CardArtFullscreenViewer
             if (@event is InputEventMouseButton mouseEvent && mouseEvent.ButtonIndex == MouseButton.Right && mouseEvent.Pressed)
             {
                 GetViewport().SetInputAsHandled();
-                this.Close();
+                Close();
             }
         }
 
@@ -101,6 +104,9 @@ namespace CardArtFullscreenViewer
 
             _background.GuiInput -= OnBackgroundGuiInput;
             _artRect.Texture = null;
+
+            _closeCallback?.Invoke();
+            _closeCallback = null;
 
             SfxCmd.Play("event:/sfx/ui/map/map_close");
         }

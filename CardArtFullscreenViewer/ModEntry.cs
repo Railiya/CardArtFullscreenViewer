@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System.Reflection;
+using HarmonyLib;
 using Godot;
 using MegaCrit.Sts2.Core.Modding;
 
@@ -14,7 +15,7 @@ namespace CardArtFullscreenViewer
             try
             {
                 Harmony harmony = new Harmony(HARMONY_INSTANCE_ID);
-                harmony.PatchAll();
+                harmony.PatchAll(Assembly.GetExecutingAssembly());
 
                 GD.Print($"Mod Initailized: {HARMONY_INSTANCE_ID}");
             }

@@ -1,8 +1,9 @@
 ﻿using HarmonyLib;
 using Godot;
 using MegaCrit.Sts2.Core.Nodes.Cards.Holders;
+using CardArtFullscreenViewer.Component;
 
-namespace CardArtFullscreenViewer
+namespace CardArtFullscreenViewer.Patch
 {
     [HarmonyPatch(typeof(NCardHolder), "OnMouseReleased")]
     public static class NCardHolderOnMouseReleasedPatch
