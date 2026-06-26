@@ -2,22 +2,23 @@
 using HarmonyLib;
 using Godot;
 using MegaCrit.Sts2.Core.Modding;
+using CardArtFullscreenViewer.External;
 
 namespace CardArtFullscreenViewer
 {
     [ModInitializer("InitializeMod")]
     public static class ModEntry
     {
-        private const string HARMONY_INSTANCE_ID = "com.github.railiya.cardartfullscreenviewer";
-
         public static void InitializeMod()
         {
             try
             {
-                Harmony harmony = new Harmony(HARMONY_INSTANCE_ID);
+                Harmony harmony = new Harmony(Config.MOD_ID);
                 harmony.PatchAll(Assembly.GetExecutingAssembly());
 
-                GD.Print($"Mod Initailized: {HARMONY_INSTANCE_ID}");
+                ModConfigBridge.DeferredRegister();
+
+                GD.Print($"Mod Initailized: {Config.MOD_ID}");
             }
             catch (Exception e)
             {

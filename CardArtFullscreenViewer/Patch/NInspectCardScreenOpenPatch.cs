@@ -2,6 +2,7 @@
 using Godot;
 using MegaCrit.Sts2.Core.Nodes.Screens;
 using MegaCrit.Sts2.Core.Nodes.Cards;
+using MegaCrit.Sts2.Core.Commands;
 using CardArtFullscreenViewer.Component;
 
 namespace CardArtFullscreenViewer.Patch
@@ -13,7 +14,6 @@ namespace CardArtFullscreenViewer.Patch
         private static NCard _card = null;
 
         private static bool _isInputEnabled = false;
-        private static bool _hasListener = false;
         private static bool _isWaitingForRelease = false;
 
         public static void Postfix(NInspectCardScreen __instance, NCard ____card)
@@ -39,6 +39,11 @@ namespace CardArtFullscreenViewer.Patch
                 return;
             }
 
+            if (Config.EnableOnCardInspection == false)
+            {
+                return;
+            }
+
             bool isRightPressed = Input.IsMouseButtonPressed(MouseButton.Right);
 
             if (_isWaitingForRelease)
@@ -61,6 +66,7 @@ namespace CardArtFullscreenViewer.Patch
             if (cardTexture != null)
             {
                 FullscreenArtViewer.ShowArt(cardTexture, EnableInput); //Restore input
+                SfxCmd.Play("event:/sfx/ui/map/map_open");
             }
 
             _isInputEnabled = false;
@@ -79,13 +85,21 @@ namespace CardArtFullscreenViewer.Patch
                 return;
             }
 
-            if (active && _hasListener == false)
+            Callable callable = Callable.From(OnProcess);
+
+            if (active)
             {
-                tree.ProcessFrame += OnProcess;
+                if (tree.IsConnected(SceneTree.SignalName.ProcessFrame, callable) == false)
+                {
+                    tree.Connect(SceneTree.SignalName.ProcessFrame, callable);
+                }
             }
-            else if (active == false && _hasListener)
+            else
             {
-                tree.ProcessFrame -= OnProcess;
+                if (tree.IsConnected(SceneTree.SignalName.ProcessFrame, callable))
+                {
+                    tree.Disconnect(SceneTree.SignalName.ProcessFrame, callable);
+                }
             }
         }
     }

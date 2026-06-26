@@ -11,6 +11,11 @@ namespace CardArtFullscreenViewer.Patch
         public static bool Prefix(NCardHolder __instance, InputEvent inputEvent,
             bool ____isHovered, ref InputEventMouseButton ____currentPressedAction)
         {
+            if (Config.EnableOnCardHolder == false)
+            {
+                return true;
+            }
+
             if (__instance.CardNode == null || __instance.CardNode.Model == null || 
                 !____isHovered || ____currentPressedAction == null)
             {
