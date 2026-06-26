@@ -3,9 +3,9 @@
 <img src="README/screenshot_1.jpg" width="70%" alt="screenshot_1">
 <img src="README/screenshot_2.jpg" width="70%" alt="screenshot_2">
 
-> 백과사전 또는 덱 메뉴에서 카드를 우클릭하여 카드 아트를 전체화면으로 볼 수 있는 Slay the Spire 2 모드입니다.<br> 카드 아트가 열린 상태에서 다시 우클릭을 하거나 ESC 키를 눌러 닫을 수 있습니다.
+> 백과사전, 덱, 카드 상세 보기 등 카드를 우클릭하여 카드 아트를 전체화면으로 볼 수 있는 Slay the Spire 2 모드입니다.<br> 카드 아트가 열린 상태에서 다시 우클릭을 하거나 ESC 키를 눌러 닫을 수 있습니다.
 
-> A Slay the Spire 2 mod that allows you to view card art in fullscreen by right-clicking a card in the Compendium or Deck menu.<br> While the card art is displayed, you can close it by right-clicking again or pressing the ESC key.
+> A Slay the Spire 2 mod that allows you to view card art in fullscreen by right-clicking a card in the Compendium, Deck or Card Inspection<br> While the card art is displayed, you can close it by right-clicking again or pressing the ESC key.
 
 <br>
 
@@ -13,9 +13,9 @@
 
 <br>
 
-**스팀 창작마당 구독**
+**스팀 창작마당**
 
-- 준비중입니다.
+- https://steamcommunity.com/sharedfiles/filedetails/?id=3751384083
 
 <br>
 
@@ -27,9 +27,9 @@
 
 <br>
 
-**Steam Workshop Subscription**
+**Steam Workshop**
 
-- Coming soon.
+- https://steamcommunity.com/sharedfiles/filedetails/?id=3751384083
 
 <br>
 
@@ -38,6 +38,13 @@
 1. Download the mod archive file from the Releases page.
 2. Navigate to your game installation directory ("Steam\steamapps\common\Slay the Spire 2").
 3. Move the extracted mod folder (`CardArtFullscreenViewer`) into the `mods` folder inside the game installation directory. (Create the `mods` folder if it does not exist.)
+
+<br>
+
+## 모드 컨픽 (Mod Config)
+> [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3747557003) 모드를 통해 설정을 변경할 수 있습니다. 카드 보상, 강화 등에서 우클릭으로 상세 보기가 나오지 않는 것이 불편한 경우 `덱, 보상 화면, 백과사전에서 사용`을 비활성화 해주세요.
+
+> You can change the settings via [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3747557003) mod. If you feeling inconvenient because of card inspection not showing up by right-clicking on card rewards or enchanment, disable the setting `Enable on Decks, Rewards and Compendium`.
 
 <br>
 
