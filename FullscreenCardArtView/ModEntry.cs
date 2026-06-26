@@ -2,9 +2,9 @@
 using HarmonyLib;
 using Godot;
 using MegaCrit.Sts2.Core.Modding;
-using CardArtFullscreenViewer.External;
+using FullscreenCardArtView.External;
 
-namespace CardArtFullscreenViewer
+namespace FullscreenCardArtView
 {
     [ModInitializer("InitializeMod")]
     public static class ModEntry

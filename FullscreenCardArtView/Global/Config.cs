@@ -1,6 +1,6 @@
-﻿using CardArtFullscreenViewer.External;
+﻿using FullscreenCardArtView.External;
 
-namespace CardArtFullscreenViewer
+namespace FullscreenCardArtView
 {
     public static class Config
     {

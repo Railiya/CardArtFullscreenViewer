@@ -3,9 +3,9 @@ using Godot;
 using MegaCrit.Sts2.Core.Nodes.Screens;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Commands;
-using CardArtFullscreenViewer.Component;
+using FullscreenCardArtView.Component;
 
-namespace CardArtFullscreenViewer.Patch
+namespace FullscreenCardArtView.Patch
 {
     [HarmonyPatch(typeof(NInspectCardScreen), "Open")]
     public static class NInspectCardScreenOpenPatch

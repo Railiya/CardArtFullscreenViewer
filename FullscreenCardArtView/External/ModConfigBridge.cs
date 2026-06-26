@@ -14,7 +14,7 @@
 using System.Reflection;
 using Godot;
 
-namespace CardArtFullscreenViewer.External;
+namespace FullscreenCardArtView.External;
 
 internal static class ModConfigBridge
 {

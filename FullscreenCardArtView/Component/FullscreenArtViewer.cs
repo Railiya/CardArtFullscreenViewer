@@ -5,7 +5,7 @@ using MegaCrit.Sts2.Core.ControllerInput;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 
-namespace CardArtFullscreenViewer.Component
+namespace FullscreenCardArtView.Component
 {
     public partial class FullscreenArtViewer : CanvasLayer
     {
