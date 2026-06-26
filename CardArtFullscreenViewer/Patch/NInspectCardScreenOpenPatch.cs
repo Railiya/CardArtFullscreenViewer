@@ -61,18 +61,15 @@ namespace CardArtFullscreenViewer.Patch
                 return;
             }
 
-            Texture2D cardTexture = _card.Model.Portrait;
-
-            if (cardTexture != null)
+            if (FullscreenArtViewer.ShowArt(_card, EnableInput))
             {
-                FullscreenArtViewer.ShowArt(cardTexture, EnableInput); //Restore input
                 SfxCmd.Play("event:/sfx/ui/map/map_open");
             }
 
             _isInputEnabled = false;
         }
 
-        private static void EnableInput()
+        private static void EnableInput() //Restore input
         {
             _isInputEnabled = true;
             _isWaitingForRelease = true;

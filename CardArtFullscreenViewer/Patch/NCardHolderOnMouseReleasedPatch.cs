@@ -16,28 +16,25 @@ namespace CardArtFullscreenViewer.Patch
                 return true;
             }
 
-            if (__instance.CardNode == null || __instance.CardNode.Model == null || 
-                !____isHovered || ____currentPressedAction == null)
+            if (__instance.CardNode == null || !____isHovered || ____currentPressedAction == null)
             {
                 return true;
             }
 
-            if (inputEvent is InputEventMouseButton mouseEvent)
+            if (inputEvent is not InputEventMouseButton mouseEvent)
             {
-                if (mouseEvent.ButtonIndex != ____currentPressedAction.ButtonIndex)
+                return true;
+            }
+
+            if (mouseEvent.ButtonIndex != ____currentPressedAction.ButtonIndex)
+            {
+                return true;
+            }
+
+            if (mouseEvent.ButtonIndex == MouseButton.Right)
+            {
+                if (FullscreenArtViewer.ShowArt(__instance.CardNode))
                 {
-                    return true;
-                }
-
-                if (mouseEvent.ButtonIndex == MouseButton.Right)
-                {
-                    Texture2D cardTexture = __instance.CardNode.Model.Portrait;
-
-                    if (cardTexture != null)
-                    {
-                        FullscreenArtViewer.ShowArt(cardTexture);
-                    }
-
                     ____currentPressedAction = null;
                     return false;
                 }

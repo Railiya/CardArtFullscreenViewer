@@ -1,6 +1,8 @@
-﻿using Godot;
+﻿using System.Reflection;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.ControllerInput;
+using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 
 namespace CardArtFullscreenViewer.Component
@@ -11,15 +13,16 @@ namespace CardArtFullscreenViewer.Component
 
         private ColorRect _background = null;
         private TextureRect _artRect = null;
+        private FieldInfo _portraitField = null;
 
         private Action _closeCallback = null;
         private bool _isComponentsInitialized = false;
 
-        public static void ShowArt(Texture2D texture, Action closeCallback = null)
+        public static bool ShowArt(NCard card, Action closeCallback = null)
         {
-            if (texture == null)
+            if (card == null)
             {
-                return;
+                return false;
             }
 
             if (_instance == null)
@@ -35,8 +38,15 @@ namespace CardArtFullscreenViewer.Component
                 }
             }
 
-            _instance._closeCallback = closeCallback;
-            _instance?.Open(texture);
+            if (_instance != null)
+            {
+                _instance._closeCallback = closeCallback;
+                return _instance.Open(card);
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void OnBackgroundGuiInput(InputEvent @event)
@@ -73,12 +83,23 @@ namespace CardArtFullscreenViewer.Component
             _artRect.MouseFilter = Control.MouseFilterEnum.Ignore;
             AddChild(_artRect);
 
+            BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
+
+            _portraitField = typeof(NCard).GetField("_portrait", flags);
             _isComponentsInitialized = true;
         }
 
-        private void Open(Texture2D texture)
+        private bool Open(NCard card)
         {
             InitiliazeComponents();
+
+            Texture2D texture = GetPortrait(card);
+
+            if (texture == null)
+            {
+                return false;
+            }
+
             _background.GuiInput += OnBackgroundGuiInput;
             _artRect.Texture = texture;
 
@@ -87,6 +108,7 @@ namespace CardArtFullscreenViewer.Component
             NHotkeyManager.Instance.AddBlockingScreen(this);
             NHotkeyManager.Instance.PushHotkeyPressedBinding(MegaInput.cancel, Close);
             NHotkeyManager.Instance.PushHotkeyPressedBinding(MegaInput.pauseAndBack, Close);
+            return true;
         }
 
         private void Close()
@@ -109,6 +131,18 @@ namespace CardArtFullscreenViewer.Component
             _closeCallback = null;
 
             SfxCmd.Play("event:/sfx/ui/map/map_close");
+        }
+
+        private Texture2D GetPortrait(NCard card)
+        {
+            object value = _portraitField.GetValue(card);
+
+            if (value is TextureRect textureRect)
+            {
+                return textureRect.Texture;
+            }
+
+            return null;
         }
     }
 }
