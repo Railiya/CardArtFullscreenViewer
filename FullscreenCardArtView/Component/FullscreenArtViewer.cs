@@ -33,6 +33,7 @@ namespace FullscreenCardArtView.Component
                 {
                     _instance = new FullscreenArtViewer();
                     _instance.Layer = 500;
+                    _instance.FollowViewportEnabled = true;
 
                     tree.Root.AddChild(_instance);
                 }
